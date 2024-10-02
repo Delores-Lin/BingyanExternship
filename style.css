@@ -81,3 +81,50 @@ aside div > section{
 .menu:hover{
     background-color: rgba(168, 162, 162, 0.15);
     cursor:pointer;
+}
+
+/* AI主体界面 */
+main{
+    position: absolute;
+    top:0;
+    left:20vw;
+    width:80vw;
+    height:100vh;
+    border:1px solid rgb(0,0,0,0);
+    
+}
+div.main{
+    position: absolute;
+    top:10%;
+    left:5%;
+}
+div.mainFunction{
+    width:65vw;
+    height:60vh;
+    display:flex;
+    flex-wrap:wrap;
+    align-items: center;
+    justify-content:space-around;
+    border:1px solid rgb(0,0,0,0);
+}
+div.mainFunction section{
+    width:45%;
+    height:25%;
+    border:1px solid rgb(0,0,0,0.2);
+    border-radius: 20px;
+}
+
+main div > section img{
+    margin-top: 1rem;
+    margin-left:0.5rem;
+    height:1.5rem;
+    float:left;
+}
+p[class$="Content"]{
+    margin-left:2rem;
+}
+
+div.mainFunction section:hover{
+    box-shadow: 2px 5px 10px rgba(0,0,1,0.1);
+    cursor:pointer;
+}
