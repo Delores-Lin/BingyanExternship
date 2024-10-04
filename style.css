@@ -85,7 +85,12 @@ aside div > section{
     background-color: rgba(168, 162, 162, 0.15);
     cursor:pointer;
 }
-
+.hightlight{
+    background-color: rgba(255,255,255,1);
+    box-shadow: 2px 0px 5px rgba(0,0,0,0.1);
+    color:rgba(0,0,0,1);
+    font-weight: bold;
+}
 /* AI主体界面 */
 main{
     position: absolute;
@@ -100,6 +105,40 @@ div.main{
     position: absolute;
     top:10%;
     left:5%;
+}
+.ad{
+    border:1px solid rgb(0,0,0,0);
+    width:300px;
+    height:50px;
+    border-radius: 20px;
+    background:linear-gradient(to right ,rgba(95, 44, 250, 0.2) ,rgba(255, 123, 0, 0.2));
+    text-align: center;
+    font-weight: 600;
+    display:;
+}
+.cancel{
+    position: relative;
+    left:150px;
+    bottom:60px;
+    width:14px;
+    height:14px;
+    font-size: 12px;
+    border-radius: 50%;
+    text-align: center;
+    margin:0;
+    line-height: 14px;
+    padding:0;
+    border:none;
+    background-color: black;
+    color:white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+.cancel:hover{
+    cursor:pointer;
+}
+.ad:hover{
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    cursor:pointer;
 }
 div.mainFunction{
     width:65vw;
@@ -209,7 +248,7 @@ div.explain{
 .searchBox section:hover img{
     background-color: rgb(0,0,0,0.1);
     cursor:pointer;
-    border-radius: 1vw;
+    border-radius: 50%;
 }
 .searchBox section:hover div.explain{
     display:initial;
@@ -231,7 +270,7 @@ div.explain{
     background-color: rgba(160, 161, 161, 0.5);
     cursor:not-allowed;
 }
-.send:hover:enabled{
+.send:enabled{
     background-color: rgba(32, 76, 255, 0.911);
     cursor:pointer;
 }
