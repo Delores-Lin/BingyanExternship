@@ -91,6 +91,10 @@ aside div > section{
     color:rgba(0,0,0,1);
     font-weight: bold;
 }
+
+.menu1 div{
+    display:;
+}
 /* AI主体界面 */
 main{
     position: absolute;
@@ -303,3 +307,144 @@ div.explain{
 .allConversation section:hover{
     background-color: rgba(168, 162, 162, 0.15);
     cursor:pointer;
+}
+
+.loginAndSignup{;
+
+    display:none;
+    align-items: center;
+    justify-content:space-around;
+    width:100%;
+    height:100%;
+    position: absolute;
+    top:0;
+    left:0;
+    background-color: rgba(0,0,0,0.2);
+}
+
+/* 登录 */
+.login{
+    display:flex;
+    justify-content:space-around;
+    align-items: center;
+    position: absolute;
+}
+h4{
+    padding:0 5px 2px 5px;
+    margin:0;
+}
+.loginBtn{
+    margin:5px;
+    margin-left:30%;
+}
+div form p{
+    margin:0;
+    font-size:14px;
+}
+div form p a.forget{
+    font-size: 13px;;
+}
+.forget{
+    font-size: 12px;
+    margin-left: 3em;
+}
+
+/* 注册 */
+.signup{
+    display:flex;
+    justify-content:space-around;
+    align-items: center;
+    position: absolute;
+    display: none;
+}
+
+.signupBtn{
+    margin:5px;
+    margin-left:30%;
+}
+.login,
+.signup{
+    width:25em;
+    height:18em;
+    background-color: rgba(255,255,255);
+    border-radius: 20px;
+}
+.closeLogin,
+.closeSignup{
+    position: absolute;
+    top:0;
+    right:0;
+    border:none;
+    border-radius: 0 5px 0 5px;
+}
+.close:hover{
+    cursor:pointer;
+}
+.userName{
+    border-bottom:2px dotted  rgb(0, 50, 255);
+}
+.userName:hover{
+    cursor:pointer;
+    color:rgb(0, 50, 255);
+}
+
+form div {
+    display:flex;
+    width:20em;
+    height:2em;
+    align-items: center;
+    border:1px solid rgb(0,0,0,0.5);
+    background-color: white;
+}
+form input:focus{
+    outline:none;
+}
+.signup form div:nth-child(2),
+.login form div:nth-child(2){
+    border-radius: 10px 10px 0 0;
+}
+.signup form div:nth-child(4),
+.login form div:nth-child(3){
+    border-radius: 0 0 10px 10px;
+}
+.signup form div input,
+.login form div input{
+    border:none;
+    background-color: transparent;
+    width:50%;
+
+}
+.signupBtn,
+.loginBtn{
+    width:7em;
+    height:1.6em;
+    border:none;
+    border-radius: 10px;
+    font-size:1.2em;
+    color:white;
+}
+.signupBtn:hover,
+.loginBtn:hover{
+    background-color: rgb(189, 233, 252);
+}
+.signupBtn:disabled,
+.loginBtn:disabled{
+    background-color: rgb(160, 161, 161);
+    cursor:not-allowed;
+}
+
+.signupBtn:enabled,
+.loginBtn:enabled{
+    background-color: rgb(164, 227, 254);
+    cursor:pointer;
+}
+#loginError,
+#signupError{
+    padding-left: 5px;
+    color:red;
+    font-size:10px;
+}
+.wrong{
+    color:red;
+    font-size:10px;
+}
