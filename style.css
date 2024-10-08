@@ -95,6 +95,51 @@ aside div > section{
 .menu1 div{
     display:;
 }
+
+/* 顶部用户界面 */
+header{
+    position:relative;
+    z-index: 1;
+    top:0;
+    left:20vw;
+    width:80vw;
+    height:4rem;
+    border:1px solid rgb(0,0,0,0);
+    background-color: white;
+    display:flex;
+    justify-content: flex-end;
+}
+header nav{
+    position:relative;
+    right:15px;
+}
+header nav ul{
+    flex-direction: column;
+    list-style: none;
+    margin:0;
+    padding:0 1rem;
+    justify-content: space-around;
+    align-items: left;
+    width:6em;
+    height:10%;
+}
+header nav ul li{
+    display:none;
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    border:1px solid rgb(0,0,0,0);
+    cursor:pointer;
+}
+header nav ul li img{
+    height:1.2rem;
+    float:left;
+}
+.logo:hover{
+    cursor: pointer !important;
+}
+
 /* AI主体界面 */
 main{
     position: absolute;
@@ -268,7 +313,9 @@ div.explain{
     border:none;
     color:white;
     font-weight: bold;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .send:disabled{
     background-color: rgba(160, 161, 161, 0.5);
@@ -277,6 +324,12 @@ div.explain{
 .send:enabled{
     background-color: rgba(32, 76, 255, 0.911);
     cursor:pointer;
+}
+img.sendImg{
+    margin:0;
+    padding:0;
+    height:2vh;
+    width:2vh;
 }
 
 .allConversation{
@@ -310,7 +363,8 @@ div.explain{
 }
 
 .loginAndSignup{;
-
+    position: relative;
+    z-index: 1000000;
     display:none;
     align-items: center;
     justify-content:space-around;
@@ -447,4 +501,32 @@ form input:focus{
 .wrong{
     color:red;
     font-size:10px;
+}
+
+/* 聊天框样式 */
+.chat-box{
+    width:80vw;
+    height:calc(90vh - 4rem);
+    top:4rem;
+    left:20vw;
+    position: absolute;
+    display:flex;
+    flex-direction: column;
+    border:2px solid rgb(0,0,0,1);
+    border-radius: 10px;
+    background-color: white;
+}
+.chatWindow{
+    flex:1;
+    padding:10px;
+    overflow-y: auto;
+}
+.chat-message{
+    margin:10px 0
+}
+.chat-massage.user{
+    text-align: right;
+}
+.chat-massage.bot {
+    text-align: left;
 }

@@ -160,7 +160,150 @@ if (user) {
     alert("登录成功!");
     userName.innerHTML = user.username;
     loginAndSignup.style.display = "none";
+    localStorage.setItem("isLoggedIn","true")
 } else {
     wrong.innerHTML = "*邮箱或密码错误";
     }
 });
+
+const logged = localStorage.getItem("isLoggedIn");
+const userImg = document.querySelector(".userImg");
+const loggedout = document.querySelector("nav ul li:nth-child(n+2)");
+if (logged === "true") {
+}
+
+// 实现聊天页面的发送消息
+const chatWindow = document.querySelector(".chatWindow");
+const messageInput = document.querySelector(".input");
+const sendBtn = document.querySelector(".send");
+const apikey ="pat_JnNMsEt95DVXH2n8keT76tP6IDh83sLPTGiSQYVv2MjrHFlce7yPzpxcvdPG1v6d";
+
+//发起对话
+sendBtn.addEventListener("click", sendMessage);
+messageInput.addEventListener("keypress", function (send) {
+    if (send.key === "Enter") {
+        sendMessage();
+    }
+});
+function displayMessage(message) {
+    const messageDiv = document.createElement("div");
+    messageDiv.textContent = message.content;
+    chatWindow.appendChild(messageDiv);
+}
+async function sendMessage() {
+    const message = messageInput.value.trim();
+    if (message === "") {
+        return;
+    } else {
+        const userMessage = {
+            "role": "user",
+            "content":message,
+            "content_type": "text"
+        };
+        displayMessage(userMessage);
+        chatHistory.push(userMessage);
+        saveChatHistory();
+        messageInput.value = "";
+        sendBtn.disabled = true;
+        try {
+            async function newChat() {
+                const response = await fetch("https://api.coze.cn/v3/chat", {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${apikey}`,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        "bot_id": "7423349399562158116",
+                        "user_id": "257",
+                        "stream": false,
+                        "auto_save_history": true,
+                        "additional_message": [userMessage]
+                    })
+                });
+                let data = await response.json();
+                console.log(data.data.status);
+                console.log(data.code);
+                console.log(data.data.status);
+                async function pollStatus() {
+                    const poll = await fetch(`https://api.coze.cn/v3/chat/retrieve?chat_id=${data.data.id}&conversation_id=${data.data.conversation_id}`, {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${apikey}`,
+                            "Content-Type": "application/json",
+                        },
+                    });
+                    const pollData = await poll.json();
+                    console.log("poll data", pollData);
+                    console.log(pollData.data.status);
+                    if (pollData.data.status === "completed") {
+                        fetchResponse(pollData.data.conversation_id, pollData.data.id);
+                    } else {
+                        setTimeout(pollStatus, 3000);
+                    }
+                }
+                // pollStatus();
+                async function fetchResponse(conversation_id, id) {
+                    const getResponse = await fetch(`https://api.coze.cn/v3/chat/message/list?chat_id=${id}&conversation_id=${conversation_id}`, {
+                        method: "POST",
+                        headers: {
+                            Authorization: `Bearer ${apikey}`,
+                            "Content-Type": "application/json",
+                        },
+                    });
+                    console.log(data.data.conversation_id);
+                    const response = await getResponse.json();
+                    console.log(response.code);
+                    console.log(response.data);
+                }
+            }
+            newChat();
+        } catch (error) {
+            console.error("出现错误：", error);
+        }
+    }
+}
+
+// async function fetchGPTResponse(prompt) {
+//     const response = await fetch(" https://api.coze.cn/v3/chat", {
+//         method: "POST",
+//         headers: {
+//         "content-type": "application/json",
+//         Authorization: `Bearer ${apikey}`,
+//         },
+//         body:JSON.stringify({
+//             bot_id: "7423071031990157362",
+//             user_id: "123456",
+//         enterMessage: [{ role: "user", content: prompt }],
+//         }),
+//     });
+//     const back = await response.json();
+//     return back.data.message;
+// }
+
+//     try {
+//         const gptResponse = await fetchGPTResponse(message);
+//         const gptMessage = {
+//         sender: "ChatGPT",
+//         text: aiResponse,
+//         };
+//         chatHistory.push(botMessage);
+//         displayMessage(gptMessage);
+//         saveChatHistory();
+//     } catch (error) {
+//         console.error("出现错误：", error);
+//     }
+//     }
+// }
+let chatHistory = JSON.parse(localStorage.getItem("chatHistory")) || [];
+window.onload = function () {
+    loadChatHistory();
+}
+function loadChatHistory() {
+    chatHistory.forEach(message => {
+        displayMessage(message);
+    });
+}
+function saveChatHistory() {
+    localStorage.setItem("chatHistory", JSON.stringify(chatHistory));
+}
