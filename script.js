@@ -218,7 +218,7 @@ async function sendMessage() {
                         "user_id": "257",
                         "stream": false,
                         "auto_save_history": true,
-                        "additional_message": [userMessage]
+                        "additional_message": [{ "role": "system", "content": "You are a helpful assistant." }, userMessage]
                     })
                 });
                 let data = await response.json();
@@ -231,7 +231,7 @@ async function sendMessage() {
                         headers: {
                             Authorization: `Bearer ${apikey}`,
                             "Content-Type": "application/json",
-                        },
+                        }
                     });
                     const pollData = await poll.json();
                     console.log("poll data", pollData);
@@ -242,10 +242,10 @@ async function sendMessage() {
                         setTimeout(pollStatus, 3000);
                     }
                 }
-                // pollStatus();
+                await pollStatus();
                 async function fetchResponse(conversation_id, id) {
                     const getResponse = await fetch(`https://api.coze.cn/v3/chat/message/list?chat_id=${id}&conversation_id=${conversation_id}`, {
-                        method: "POST",
+                        method: "GET",
                         headers: {
                             Authorization: `Bearer ${apikey}`,
                             "Content-Type": "application/json",
@@ -257,7 +257,7 @@ async function sendMessage() {
                     console.log(response.data);
                 }
             }
-            newChat();
+            await newChat();
         } catch (error) {
             console.error("出现错误：", error);
         }
