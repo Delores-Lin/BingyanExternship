@@ -85,7 +85,7 @@ aside div > section{
     background-color: rgba(168, 162, 162, 0.15);
     cursor:pointer;
 }
-.hightlight{
+.allConversation section:nth-child(1){
     background-color: rgba(255,255,255,1);
     box-shadow: 2px 0px 5px rgba(0,0,0,0.1);
     color:rgba(0,0,0,1);
@@ -510,7 +510,7 @@ form input:focus{
     top:4rem;
     left:20vw;
     position: absolute;
-    display:flex;
+    display:none;
     flex-direction: column;
     border:2px solid rgb(0,0,0,1);
     border-radius: 10px;
@@ -530,3 +530,5 @@ form input:focus{
 .chat-massage.bot {
     text-align: left;
 }
+
+/* 弹出对话框 */
